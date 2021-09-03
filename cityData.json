@@ -2,13 +2,13 @@
     "cities": [
       { 
         "city": "San Francisco",
-        "image": "https://www.kron4.com/wp-content/uploads/sites/11/2021/06/AP20143175060602.jpg?w=512&h=288&crop=1",
-        "article": "yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada"
+        "image": "https://www.kron4.com/wp-content/uploads/sites/11/2021/06/AP20143175060602.jpg?w=512&h=288&crop=1"
+        
       },
       {
         "city": "Mexico City",
-        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Sobrevuelos_CDMX_IMG_5982_%2839488832615%29.jpg/800px-Sobrevuelos_CDMX_IMG_5982_%2839488832615%29.jpg",
-        "article":"yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada"
+        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Sobrevuelos_CDMX_IMG_5982_%2839488832615%29.jpg/800px-Sobrevuelos_CDMX_IMG_5982_%2839488832615%29.jpg"
+        
       }
     ]
   }
