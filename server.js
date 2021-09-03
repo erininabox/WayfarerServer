@@ -4,6 +4,8 @@ const citiesController = require('./controllers/citiesController');
 const cors = require('cors')
 const port = process.env.PORT || 4000;
 const app = express();
+const rowdy = require('rowdy-logger')
+const rowdyResults = rowdy.begin(app)
 
 
 // middleware
@@ -18,4 +20,5 @@ app.use('/api/cities', citiesController)
 //listen
 app.listen(port,() =>{
     console.log(`Server is running on port ${port}`)
+    rowdyResults.print()
 })

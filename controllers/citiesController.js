@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
 
 
 // actual route - GET /api/cities/:id
-router.get('/cities/:id', (req, res) => {
+router.get('/:id', (req, res) => {
   db.City.findById(req.params.id, (err, foundCity) => {
       console.log('hello from one city')
     if (err) return console.log(err);
