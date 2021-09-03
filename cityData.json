@@ -1,15 +1,41 @@
 {
-    "cities": [
-      { 
-        "city": "San Francisco",
-        "image": "https://www.kron4.com/wp-content/uploads/sites/11/2021/06/AP20143175060602.jpg?w=512&h=288&crop=1"
-        
-      },
-      {
-        "city": "Mexico City",
-        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Sobrevuelos_CDMX_IMG_5982_%2839488832615%29.jpg/800px-Sobrevuelos_CDMX_IMG_5982_%2839488832615%29.jpg"
-        
-      }
-    ]
-  }
-  
+  "cities": [
+    {
+      "city": "San Francisco",
+      "image": "https://www.kron4.com/wp-content/uploads/sites/11/2021/06/AP20143175060602.jpg?w=512&h=288&crop=1",
+      "articles": [
+        {
+          "title": " Dharma Bums 2  ",
+          "subtitle": " An article you ahve read",
+          "author": "Erin",
+          "images": [
+            "coitTower.png ",
+            "baybridge.png "
+          ],
+          "content": [
+            "i",
+            "am",
+            "a",
+            "string"
+          ]
+        },
+        {
+          "title": "Best Tacos en la ciudad",
+          "subtitle": "tengom mucho hambre",
+          "author": "Porfirio Diaz",
+          "images": [],
+          "content": [
+            "i",
+            "am",
+            "a",
+            "string"
+          ]
+        }
+      ]
+    },
+    {
+      "city": "Mexico City",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Sobrevuelos_CDMX_IMG_5982_%2839488832615%29.jpg/800px-Sobrevuelos_CDMX_IMG_5982_%2839488832615%29.jpg"
+    }
+  ]
+}
