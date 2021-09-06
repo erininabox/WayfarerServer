@@ -9,14 +9,26 @@ const db = require('../models')
 
 // index articles route
 router.get('/:cityId/articles', (req,res)=>{
-    res.send('this the articles index route')
+    db.City.find({}, (err, foundCity)=>{
+        console.log('hello from index articles route the found article render')
+         if (err) return console.log(err)
+        // let foundArticles = 
+        console.log(foundCity)
+        res.json(foundCity)
+        
+    })
+   
 })
 
-// show articles route
+
+
+// show article route
 router.get('/:cityId/articles/:articleId', (req,res) =>{
-    res.send('thisis the article show route')
+    res.send('this is the article show route')
 
 })
+
+
 
 // create articles route
 

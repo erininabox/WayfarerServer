@@ -9,6 +9,9 @@ const db = require('../models');
 router.get('/', (req, res) => {
   db.City.find({}, (err, foundCities) => {
     console.log('hello from get')
+
+    console.log(foundCities)
+
     if (err) return console.log(err);
 
     

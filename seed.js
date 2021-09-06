@@ -22,6 +22,25 @@ db.City.deleteMany({}, (err, result) => {
     })
 })
 
+db.Article.deleteMany({}, (err, result) => {
+    if (err) {
+      console.log(err);
+      process.exit();
+    }
+    console.log(result.deletedCount, 'article deleted')
+    db.Article.create(data.cities,(err,seededCities) =>{
+        if (err) {
+            console.log(err)
+            process.exit()
+        }
+    
+        console.log(seededCities.length, 'article created')
+        console.log('done')
+    
+        process.exit()
+    })
+})
+
 
 // Create
 
