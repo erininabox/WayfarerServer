@@ -35,7 +35,23 @@
     },
     {
       "city": "Mexico City",
-      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Sobrevuelos_CDMX_IMG_5982_%2839488832615%29.jpg/800px-Sobrevuelos_CDMX_IMG_5982_%2839488832615%29.jpg"
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Sobrevuelos_CDMX_IMG_5982_%2839488832615%29.jpg/800px-Sobrevuelos_CDMX_IMG_5982_%2839488832615%29.jpg",
+      "articles": [
+        {
+          "title":"el titulo",
+          "subtile": "el subtitulo",
+          "author": "el autor",
+          "content": [
+            "el contenido", 
+            "mas contenido", 
+            "aun mas contenido"
+          ]
+        }
+
+      ]
+      
+    
+      
     }
   ]
 }

@@ -8,6 +8,10 @@ const db = require('../models')
 
 
 // index articles route
+
+// do we need this to render as a page? probably not, the articles should be indexed on the city show page anyway
+// either way, would need to know how to return the JSON object with only the articles per city
+
 router.get('/:cityId/articles', (req,res)=>{
     db.City.find({}, (err, foundCity)=>{
         console.log('hello from index articles route the found article render')
@@ -23,10 +27,31 @@ router.get('/:cityId/articles', (req,res)=>{
 
 
 // show article route
+
+// idea1: create an Article model and integrate it into the City Model
+// idea2: somehow append an _id to each article, nfc how to do that though
+// idea 3: can we just dig down through the JSON and render the articles ina react component? do we even need a route??
+
+
+
 router.get('/:cityId/articles/:articleId', (req,res) =>{
-    res.send('this is the article show route')
+    db.City.findById(req.params.id, (err, foundArticle) => {
+        console.log('hello from one article' + foundArticle)
+        if (err) return console.log(err)
+        res.json(foundArticle)
+    })
 
 })
+
+
+// router.get('/:id', (req, res) => {
+//     db.City.findById(req.params.id, (err, foundCity) => {
+//         console.log('hello from one city')
+//       if (err) return console.log(err);
+      
+//       res.json(foundCity);
+//     });
+//   });
 
 
 
@@ -36,6 +61,9 @@ router.get('/:cityId/articles/:articleId', (req,res) =>{
 router.post('/:cityId/articles', (req,res)=>{
     res.send('this the create route')
 })
+
+
+
 
 
 // update articles route
