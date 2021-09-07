@@ -17,7 +17,7 @@ app.use(express.json())
 
 // api routes
 app.use('/api/cities', citiesController)
-app.use('/api/cities/', articlesController)
+app.use('/api/cities', articlesController)
 
 
 //listen
