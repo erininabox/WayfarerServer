@@ -64,24 +64,15 @@ router.get('/:cityId/:articleId', (req,res) =>{
 
 })
 
-
-// router.get('/:id', (req, res) => {
-//     db.City.findById(req.params.id, (err, foundCity) => {
-//         console.log('hello from one city')
-//       if (err) return console.log(err);
-      
-//       res.json(foundCity);
-//     });
-//   });
-
-
-
-// create articles route
-
-
 router.post('/:cityId/create', (req,res)=>{
-    res.send('this the create route')
+    db.Article.create(req.body,(err, savedArticle)=>{
+        console.log('created article')
+        if (err) return console.log(err)
+        res.json(savedArticle)
+    })
 })
+
+
 
 
 
@@ -89,15 +80,41 @@ router.post('/:cityId/create', (req,res)=>{
 
 // update articles route
 
-router.put('/:cityId/articles/:articleId', (req,res)=>{
-    res.send('this is the article update')
+router.put('/:cityId/:articleId', (req,res)=>{
+    db.Article.findByIdAndUpdate(
+        req.params.id, // finds the City with id passed in from URL
+        req.body, // passes in data to update a City from the req.body
+        {new: true}, // We want to updated City returned in the callback
+        (err, updatedArticle) => { // function called after update completes
+          if (err) return console.log(err);
+          
+          res.json(updatedArticle);
+        });
 })
+
+router.put('/:id', (req, res) => {
+    
+  });
+
 
 
 
 // destroy articles route
 router.delete('/:cityId/articles/:articleId',(req,res)=>{
-    res.send('this is the delete route')
+    db.Article.findByIdAndDelete(req.params.id, (err, deletedArticle) => {
+        if (err) return console.log(err);
+    
+        res.json({ messaage:'Successful deletion' });
+      });
 })
+
+
+// router.delete('/:id', (req, res) => {
+//     db.City.findByIdAndDelete(req.params.id, (err, deletedCity) => {
+//       if (err) return console.log(err);
+  
+//       res.json({ messaage:'Successful deletion' });
+//     });
+//   });
 
 module.exports = router
