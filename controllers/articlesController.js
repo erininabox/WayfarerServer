@@ -64,57 +64,55 @@ router.get('/:cityId/:articleId', (req,res) =>{
 
 })
 
-router.post('/:cityId/create', (req,res)=>{
-    db.Article.create(req.body,(err, savedArticle)=>{
+router.post('/:cityId', (req,res)=>{
+    db.Article.create(req.body,(err, newArticle)=>{
         console.log('created article')
         if (err) return console.log(err)
-        res.json(savedArticle)
+        db.City.findByIdAndUpdate(
+            req.params.cityId, { $push: {articles: newArticle}}, (err, updatedCity) =>{
+                if (err) return console.log(err)
+                res.json(updatedCity)
+            }
+        )
     })
 })
 
+// update articles route GOOD GOD WHAT
 
-
-
-
-
-
-// update articles route
-
-router.put('/:cityId/:articleId', (req,res)=>{
-    db.Article.findByIdAndUpdate(
-        req.params.id, // finds the City with id passed in from URL
-        req.body, // passes in data to update a City from the req.body
-        {new: true}, // We want to updated City returned in the callback
-        (err, updatedArticle) => { // function called after update completes
-          if (err) return console.log(err);
+// router.put('/:cityId/:articleId', (req,res)=>{
+//     db.Article.findByIdAndUpdate(
+//         req.params.id, // finds the ARTICLE with id passed in from URL
+//         req.body, // passes in data to update a ARTICLE from the req.body
+//         {new: true}, // We want to updated ARTICLE returned in the callback
+//         (err, updatedArticle) => { // function called after update completes
+//           if (err) return console.log(err);
           
-          res.json(updatedArticle);
-        });
-})
+//           res.json(updatedArticle);
+//         });
+// })
 
-router.put('/:id', (req, res) => {
+// router.put('/:id', (req, res) => {
     
-  });
+//   });
 
 
 
 
 // destroy articles route
-router.delete('/:cityId/articles/:articleId',(req,res)=>{
-    db.Article.findByIdAndDelete(req.params.id, (err, deletedArticle) => {
+router.delete('/:cityId/:articleId',(req,res)=>{
+    //go low to high, delete from the articles db first, then pass the article that was deleted to the city db. 
+    db.Article.findByIdAndDelete(req.params.articleId, (err, deletedArticle) => {
         if (err) return console.log(err);
-    
-        res.json({ messaage:'Successful deletion' });
+        db.City.findByIdAndUpdate(
+            req.params.cityId,
+            { $pull: {articles:deletedArticle}},
+            {new: true}, // do you want the version with or without changes?, you want the City with the article deleted, therefore new:true. 
+            (err, updatedCity) => {
+                if (err) return console.log(err)
+                res.json(updatedCity)
+            }
+        )
       });
 })
-
-
-// router.delete('/:id', (req, res) => {
-//     db.City.findByIdAndDelete(req.params.id, (err, deletedCity) => {
-//       if (err) return console.log(err);
-  
-//       res.json({ messaage:'Successful deletion' });
-//     });
-//   });
 
 module.exports = router
