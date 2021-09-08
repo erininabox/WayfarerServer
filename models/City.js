@@ -11,7 +11,11 @@ const ArticleSchema = new Schema({
   subtitle: String,
   author: String,
   images: [],
-  content: []
+  content: [],
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }
 })
 
 
