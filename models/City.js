@@ -4,16 +4,19 @@ const Schema = mongoose.Schema;
 //define article schema here
 // any time there is a new schema, mongo automatically appends an id property to that schema
 
-// preiviously had schema embedded, but removed that because of id issues with each article
+// preiviouslypm had schema embedded, but removed that because of id issues with each article
 
 const ArticleSchema = new Schema({
   title: String,
   subtitle: String,
   author: String,
   images: [],
-  content: String
+  content: String,
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }
 })
-
 
 const CitySchema = new Schema({
   city: String,
