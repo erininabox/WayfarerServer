@@ -27,12 +27,14 @@ router.get('/:id', (req, res) => {
     if (err) return console.log(err);
     
     res.json(foundCity);
+    
   });
 });
 
 
 // actual route - POST /api/cities
 router.post('/', (req, res) => {
+  
   db.City.create(req.body, (err, savedCity) => {
       console.log('hello from post')
     if (err) return console.log(err);

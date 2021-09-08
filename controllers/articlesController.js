@@ -13,36 +13,16 @@ const db = require('../models')
 // either way, would need to know how to return the JSON object with only the articles per city
 
 router.get('/:cityId/articles', (req,res)=>{
-    db.City.find({}, (err, foundCity)=>{
+    db.City.findById(req.params.cityId, (err, foundCity)=>{
         console.log('hello from index articles route the found article render')
          if (err) return console.log(err)
         // let foundArticles = 
-        console.log(foundCity)
+        console.log(foundCity.articles)
         res.json(foundCity)
         
     })
    
 })
-
-
-
-// show article route
-
-// idea1: create an Article model and integrate it into the City Model
-// idea2: somehow append an _id to each article, nfc how to do that though
-// idea 3: can we just dig down through the JSON and render the articles ina react component? do we even need a route??
-
-
-
-router.get('/:cityId/articles/:articleId', (req,res) =>{
-    db.City.findById(req.params.id, (err, foundArticle) => {
-        console.log('hello from one article' + foundArticle)
-        if (err) return console.log(err)
-        res.json(foundArticle)
-    })
-
-})
-
 
 // router.get('/:id', (req, res) => {
 //     db.City.findById(req.params.id, (err, foundCity) => {
@@ -50,33 +30,89 @@ router.get('/:cityId/articles/:articleId', (req,res) =>{
 //       if (err) return console.log(err);
       
 //       res.json(foundCity);
+      
 //     });
 //   });
 
 
 
-// create articles route
+// show article route
 
+router.get('/:cityId/:articleId', (req,res) =>{
+    console.log('route hit')
+    console.log(req.params.articleId)
+    //look thought City object to get the id, then find articles in that
+    db.City.findById(req.params.cityId, (err, foundCity) => {
+        console.log('found' + foundCity.articles)
+        //return those found articles ina  new array, this is not essential but cleans up the code a little
+        const articlesArray = [...foundCity.articles]
+        console.log('city array log' , articlesArray)
+        console.log(req.params.articleId)
+        //this searches the articles array for the article with the same id as in the url and stores it as a variable
+        
+        const foundArticle = articlesArray.find((article)=>{
+        // note the == here, the article._id is a string but req.params.articleId is acutally a differnt datatype called an object ID, strict equality will match datatypes and fail, so use the double equals
+        return article._id == req.params.articleId
+         
+        })
+        console.log(foundArticle)
+        if (err) return console.log(err)
+        //now we render out that found article on the page, 
+        res.json(foundArticle)
+        
+    })
 
-router.post('/:cityId/articles', (req,res)=>{
-    res.send('this the create route')
 })
 
-
-
-
-
-// update articles route
-
-router.put('/:cityId/articles/:articleId', (req,res)=>{
-    res.send('this is the article update')
+router.post('/:cityId', (req,res)=>{
+    db.Article.create(req.body,(err, newArticle)=>{
+        console.log('created article')
+        if (err) return console.log(err)
+        db.City.findByIdAndUpdate(
+            req.params.cityId, { $push: {articles: newArticle}}, (err, updatedCity) =>{
+                if (err) return console.log(err)
+                res.json(updatedCity)
+            }
+        )
+    })
 })
+
+// update articles route GOOD GOD WHAT
+
+// router.put('/:cityId/:articleId', (req,res)=>{
+//     db.Article.findByIdAndUpdate(
+//         req.params.id, // finds the ARTICLE with id passed in from URL
+//         req.body, // passes in data to update a ARTICLE from the req.body
+//         {new: true}, // We want to updated ARTICLE returned in the callback
+//         (err, updatedArticle) => { // function called after update completes
+//           if (err) return console.log(err);
+          
+//           res.json(updatedArticle);
+//         });
+// })
+
+// router.put('/:id', (req, res) => {
+    
+//   });
+
 
 
 
 // destroy articles route
-router.delete('/:cityId/articles/:articleId',(req,res)=>{
-    res.send('this is the delete route')
+router.delete('/:cityId/:articleId',(req,res)=>{
+    //go low to high, delete from the articles db first, then pass the article that was deleted to the city db. 
+    db.Article.findByIdAndDelete(req.params.articleId, (err, deletedArticle) => {
+        if (err) return console.log(err);
+        db.City.findByIdAndUpdate(
+            req.params.cityId,
+            { $pull: {articles:deletedArticle}},
+            {new: true}, // do you want the version with or without changes?, you want the City with the article deleted, therefore new:true. 
+            (err, updatedCity) => {
+                if (err) return console.log(err)
+                res.json(updatedCity)
+            }
+        )
+      });
 })
 
 module.exports = router
