@@ -40,9 +40,10 @@ router.get('/:cityId/articles', (req,res)=>{
 
 router.get('/:cityId/:articleId', (req,res) =>{
     console.log('route hit')
-    console.log(req.params.articleId)
+    console.log(req.params.cityId)
     //look thought City object to get the id, then find articles in that
     db.City.findById(req.params.cityId, (err, foundCity) => {
+        if (err) return console.log(err)
         console.log('found' + foundCity.articles)
         //return those found articles ina  new array, this is not essential but cleans up the code a little
         const articlesArray = [...foundCity.articles]
@@ -56,7 +57,6 @@ router.get('/:cityId/:articleId', (req,res) =>{
          
         })
         console.log(foundArticle)
-        if (err) return console.log(err)
         //now we render out that found article on the page, 
         res.json(foundArticle)
         

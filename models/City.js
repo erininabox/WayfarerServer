@@ -11,7 +11,7 @@ const ArticleSchema = new Schema({
   subtitle: String,
   author: String,
   images: [],
-  content: []
+  content: String
 })
 
 
