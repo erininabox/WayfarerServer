@@ -60,9 +60,9 @@ router.put('/:id', (req, res) => {
 
 // actual route - DELETE /api/cities/:id
 router.delete('/:id', (req, res) => {
+  console.log('delete route')
   db.City.findByIdAndDelete(req.params.id, (err, deletedCity) => {
     if (err) return console.log(err);
-
     res.json({ messaage:'Successful deletion' });
   });
 });

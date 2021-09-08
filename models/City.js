@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 //define article schema here
 // any time there is a new schema, mongo automatically appends an id property to that schema
 
-// preiviously had schema embedded, but removed that because of id issues with each article
+// preiviouslypm had schema embedded, but removed that because of id issues with each article
 
 const ArticleSchema = new Schema({
   title: String,
@@ -17,7 +17,6 @@ const ArticleSchema = new Schema({
     ref: 'User'
   }
 })
-
 
 const CitySchema = new Schema({
   city: String,
