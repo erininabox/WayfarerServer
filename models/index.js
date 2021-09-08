@@ -15,5 +15,6 @@ mongoose.connect(connectionString, configOptions)
   // added the Article property with the .Article because we are no longer using an embedded schema
 module.exports = {
   City: require('./City').City,
-  Article: require ('./City').Article
+  Article: require ('./City').Article,
+  User: require('./User')
 };
